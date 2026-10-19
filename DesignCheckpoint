@@ -1,0 +1,26 @@
+1. Why is inheritance appropriate between WellnessEntry and MoodEntry?
+
+A wellness entry is a specialized mood entry because it contains a date, mood rating, and note, along with sleep and exercise information. Public inheritance allows WellnessEntry to reuse the existing constructors, setters, getters, and display function instead of duplicating the original fields. It also keeps the original mood-entry validation rules.
+
+2. Why does WellnessLogger use composition rather than inherit from WellnessEntry?
+
+A logger is not a type of wellness entry. It is an object that manages a collection of wellness entries. Composition is appropriate because WellnessLogger owns an array of up to 20 entries and is responsible for adding, updating, displaying, saving, and loading them. This keeps collection management separate from the information stored in each entry.
+
+3. How does the derived constructor initialize the base portion of an entry?
+
+The parameterized WellnessEntry constructor uses a constructor initializer list:
+
+cpp
+WellnessEntry::WellnessEntry(
+    string entryDate, int entryRating, string entryNote,
+    double entrySleepHours, int entryExerciseMinutes)
+    : MoodEntry(entryDate, entryRating, entryNote),
+      sleepHours(0.0), exerciseMinutes(0) {
+    setSleepHours(entrySleepHours);
+    setExerciseMinutes(entryExerciseMinutes);
+}
+The MoodEntry constructor initializes and validates the date, rating, and note. The derived constructor initializes its own fields and validates sleep and exercise through their setters.
+
+4. How are the five fields saved and reconstructed without exposing private data?
+
+The logger accesses the fields through public const getters and writes each field to a separate line in moodmate.txt. When loading, it reads a complete five-line record and passes the values to the WellnessEntry parameterized constructor. That constructor and the base constructor apply the validation rules again. The private data stays encapsulated throughout the process.

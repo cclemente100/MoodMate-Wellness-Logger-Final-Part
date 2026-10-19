@@ -1,0 +1,59 @@
+Class diagram
+MoodEntry
+Base class
+
+- date: string (private)
+
+- rating: int (private)
+
+- note: string (private)
+
++ MoodEntry()
+
++ MoodEntry(date, rating, note)
+
++ setDate(), setRating(), setNote()
+
++ getDate(), getRating(), getNote() const
+
++ printEntry() const
+
+Public inheritance — “is-a”
+
+WellnessEntry
+Derived class
+
+- sleepHours: double (private)
+
+- exerciseMinutes: int (private)
+
++ WellnessEntry()
+
++ WellnessEntry(all five fields)
+
++ setSleepHours(), setExerciseMinutes()
+
++ getSleepHours(), getExerciseMinutes() const
+
++ printEntry() const
+
+Composition — “has-a”
+
+WellnessLogger
+- entries: WellnessEntry[20] (private)
+
+- entryCount: int (private)
+
++ addEntry()
+
++ displayEntries() const
+
++ updateEntry()
+
++ displayAverageRating() const
+
++ saveToFile() const
+
++ loadFromFile()
+
++ getEntryCount() const
